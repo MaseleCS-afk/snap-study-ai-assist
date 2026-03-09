@@ -1,9 +1,10 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import {
-  Home, Upload, BookOpen, Bot, Users, LayoutDashboard, Zap, Menu, X
+  Home, Upload, BookOpen, Bot, Users, LayoutDashboard, Zap, Menu, X, LogOut
 } from "lucide-react";
 import { useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
 
 const navItems = [
   { to: "/", icon: Home, label: "Home" },
@@ -16,7 +17,17 @@ const navItems = [
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
+  const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { user, signOut } = useAuth();
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate("/login");
+  };
+
+  const displayName = user?.user_metadata?.full_name || user?.email?.split("@")[0] || "Student";
+  const initials = displayName.split(" ").map((n: string) => n[0]).join("").toUpperCase().slice(0, 2);
 
   return (
     <div className="min-h-screen bg-background flex">
@@ -60,17 +71,24 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           })}
         </nav>
 
-        {/* Footer */}
-        <div className="px-4 py-4 border-t border-border">
+        {/* Footer with user info */}
+        <div className="px-4 py-4 border-t border-border space-y-3">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-full gradient-primary flex items-center justify-center text-primary-foreground text-xs font-bold">
-              JD
+              {initials}
             </div>
-            <div>
-              <p className="text-xs font-semibold text-foreground">Jane Doe</p>
-              <p className="text-xs text-muted-foreground">Student</p>
+            <div className="flex-1 min-w-0">
+              <p className="text-xs font-semibold text-foreground truncate">{displayName}</p>
+              <p className="text-xs text-muted-foreground truncate">{user?.email}</p>
             </div>
           </div>
+          <button
+            onClick={handleSignOut}
+            className="flex items-center gap-2 w-full px-3 py-2 rounded-xl text-sm text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+          >
+            <LogOut className="w-4 h-4" />
+            Sign out
+          </button>
         </div>
       </aside>
 
