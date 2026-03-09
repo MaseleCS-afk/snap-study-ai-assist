@@ -13,17 +13,17 @@ const weeklyData = [
 ];
 
 const topicData = [
-  { name: "Biology", value: 85, fill: "#4F46E5" },
-  { name: "Chemistry", value: 62, fill: "#34D399" },
-  { name: "CS", value: 91, fill: "#F59E0B" },
-  { name: "Economics", value: 48, fill: "#EF4444" },
-  { name: "Physics", value: 73, fill: "#8B5CF6" },
+  { name: "Biology", value: 85, fill: "hsl(243 75% 59%)" },
+  { name: "Chemistry", value: 62, fill: "hsl(158 64% 52%)" },
+  { name: "CS", value: 91, fill: "hsl(38 92% 50%)" },
+  { name: "Economics", value: 48, fill: "hsl(0 84% 60%)" },
+  { name: "Physics", value: 73, fill: "hsl(258 70% 65%)" },
 ];
 
 const pieData = [
-  { name: "Mastered", value: 18, color: "#34D399" },
-  { name: "Learning", value: 11, color: "#4F46E5" },
-  { name: "Needs Review", value: 7, color: "#F59E0B" },
+  { name: "Mastered", value: 18, color: "hsl(158 64% 52%)" },
+  { name: "Learning", value: 11, color: "hsl(243 75% 59%)" },
+  { name: "Needs Review", value: 7, color: "hsl(38 92% 50%)" },
 ];
 
 const stats = [
