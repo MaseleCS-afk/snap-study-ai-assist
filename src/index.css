@@ -145,6 +145,23 @@
     @apply bg-background text-foreground;
     font-family: 'Inter', system-ui, sans-serif;
   }
+  /* Smooth theme transition */
+  *,
+  *::before,
+  *::after {
+    transition-property: background-color, border-color, color, box-shadow;
+    transition-duration: 250ms;
+    transition-timing-function: ease-in-out;
+  }
+  /* Exclude elements where transition causes issues */
+  [data-no-theme-transition],
+  [data-no-theme-transition] *,
+  .animate-spin,
+  .animate-spin *,
+  [data-radix-popper-content-wrapper],
+  [data-radix-popper-content-wrapper] * {
+    transition-property: none !important;
+  }
 }
 
 @layer components {
