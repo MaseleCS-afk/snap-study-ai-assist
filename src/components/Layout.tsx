@@ -74,14 +74,17 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
         {/* Footer with user info */}
         <div className="px-4 py-4 border-t border-border space-y-3">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full gradient-primary flex items-center justify-center text-primary-foreground text-xs font-bold">
-              {initials}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="w-8 h-8 rounded-full gradient-primary flex items-center justify-center text-primary-foreground text-xs font-bold shrink-0">
+                {initials}
+              </div>
+              <div className="min-w-0">
+                <p className="text-xs font-semibold text-foreground truncate">{displayName}</p>
+                <p className="text-xs text-muted-foreground truncate">{user?.email}</p>
+              </div>
             </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-xs font-semibold text-foreground truncate">{displayName}</p>
-              <p className="text-xs text-muted-foreground truncate">{user?.email}</p>
-            </div>
+            <ThemeToggle />
           </div>
           <button
             onClick={handleSignOut}
